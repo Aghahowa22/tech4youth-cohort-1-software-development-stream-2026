@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "grid",
+    "title": "Thinking in CSS Grid",
+    "date": "2026-02-03",
+    "excerpt": "Rows and columns give you a layout language flexbox can't: CSS Grid lets you place content by its position on a two-dimensional plane instead of just along one axis.",
+    "body": [
+      "Flexbox is brilliant for laying things out along a single direction — a row of nav links, a column of form fields. But the moment you need to control rows and columns at the same time, flexbox starts fighting you. That's the gap CSS Grid fills.",
+      "With grid-template-columns and grid-template-areas, you describe the shape of a layout directly: a sidebar, a header that spans the full width, a main content area next to it. The browser handles the arithmetic of sizing tracks so the whole page reads like a blueprint rather than a chain of nested boxes.",
+      "The real payoff for teaching shows up at the media query. A three-column grid can collapse to a single column by changing one line — grid-template-columns: 1fr instead of repeat(3, 1fr) — without touching the HTML or the individual item styles at all."
+    ]
+  },
+  {
+    "id": 2,
+    "icon": "flex",
+    "title": "Why Flexbox Still Matters",
+    "date": "2026-02-10",
+    "excerpt": "Grid gets the spotlight, but flexbox is still the right tool anytime you're arranging items along one axis — and it's what makes a responsive navbar so painless.",
+    "body": [
+      "A navigation bar is the textbook flexbox problem: a logo on one side, a handful of links on the other, all vertically centered no matter how tall any one element gets. display: flex plus justify-content: space-between solves it in two lines.",
+      "Flexbox also shines with content whose size you don't control ahead of time — a row of tags, a button group, a set of cards that should wrap gracefully onto a new line on a narrow screen. flex-wrap turns a rigid row into a layout that reflows on its own.",
+      "The mental model that helps most: grid is for the page's skeleton, flexbox is for the muscles around each bone. Most real interfaces use both, nested inside each other."
+    ]
+  },
+  {
+    "id": 3,
+    "icon": "fetch",
+    "title": "Loading Data with the Fetch API",
+    "date": "2026-02-17",
+    "excerpt": "fetch() turns a static page into one that can load its own content. This post walks through the request, the JSON response, and rendering it into the DOM.",
+    "body": [
+      "Every post on this page, including this one, was loaded with a single fetch('posts.json') call. fetch returns a promise that resolves to a Response object, and calling .json() on that response returns a second promise that resolves to actual JavaScript data.",
+      "The pattern worth memorizing is fetch(url).then(res => res.json()).then(data => { /* use data */ }) — or the same thing written with async/await, which reads top to bottom instead of nesting callbacks.",
+      "Error handling matters as much as the happy path: a network failure or a bad status code won't automatically throw, so checking res.ok before trusting the response is what keeps a broken request from silently rendering an empty page."
+    ]
+  }
+]
