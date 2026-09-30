@@ -1,4 +1,46 @@
 # DOM Events & Asynchronous JavaScript
+## The 9 Topics We'll Cover
+
+**The learning path:** Callbacks → Promises → JSON → Fetch (GET) → Fetch (POST) → async/await → DOM & Events → Loading/Error/Retry States → Client Storage & Privacy
+---
+
+## 1. Callbacks
+JavaScript is single-threaded, so slow tasks (timers, server requests) are handed off and finished later. A callback is a function passed into another function to run when that task is done. Nest too many and you get "callback hell", which is why Promises exist.
+
+## 2. Promises
+A Promise is a placeholder for a value that will arrive later. It is either pending, fulfilled or rejected. Use `.then()` and `.catch()` to react, chain them to keep steps flat, and use `Promise.all()` to run independent tasks in parallel.
+
+## 3. JSON
+The plain-text format browsers and servers use to exchange data. `JSON.stringify()` turns an object into a string before sending, and `JSON.parse()` turns a string back into an object after receiving. Remember the strict rules: double quotes and no trailing commas.
+
+## 4. Fetching API Data (GET Requests)
+`fetch()` retrieves data from a server and returns a Promise. It needs two `.then()` steps: one for the response, one to read the body. It only rejects on network failure, so always check `response.ok`, and use the Network tab to debug.
+
+## 5. Sending JSON Data (POST Requests)
+POST sends data *to* a server. It needs three things: `method: 'POST'`, a `Content-Type: application/json` header, and a `JSON.stringify()`'d body. Check `response.ok`, because a 400 or 422 will not trigger `.catch()`.
+
+## 6. async/await
+Cleaner syntax on top of Promises that makes async code read top to bottom. `async` marks the function and `await` pauses until a Promise settles. Handle errors with `try/catch/finally`, and still check `response.ok`.
+
+## 7. DOM Selection, Safe Rendering & Events
+Select elements with `querySelector` / `querySelectorAll`, and update them with `textContent` or `createElement()` rather than `innerHTML` to avoid XSS. Use `addEventListener` to respond to user actions, call `event.preventDefault()` on form submits, and validate input with clear feedback.
+
+## 8. Loading, Error & Retry States
+Every screen that loads data has four states: loading, success, empty and error. Show something meaningful in each, and give users a Retry button on failure that simply calls the load function again.
+
+## 9. Client Storage & Privacy
+`localStorage` persists until cleared; `sessionStorage` clears when the tab closes. Both store strings only, so use `JSON.stringify` / `JSON.parse` for objects. Never store passwords, tokens or sensitive data there; auth tokens belong in `httpOnly` cookies.
+
+
+
+
+
+
+
+
+
+
+# DOM Events & Asynchronous JavaScript
 
 ## How the Modules Connect
 
