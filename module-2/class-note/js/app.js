@@ -14,13 +14,38 @@
 //   .then((response) => response.json())
 //   .then((json) => console.log(json));
 
-function getPosts() {
-  fetch("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .catch(function (error) {
-      console.log("Something went wrong:", error.message); // runs on failure
+// async function getUsers() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
+
+async function createUser() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Post-1",
+        body: "this is the body of this request",
+        userId: 2,
+      }),
     });
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
-getPosts();
+createUser();
