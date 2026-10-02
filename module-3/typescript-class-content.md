@@ -1,6 +1,79 @@
 # TypeScript Foundations: Types, Functions, Generics, and Project Tooling
 
 
+## Part A: The Language
+
+### 1. What TypeScript Is (and Is Not)
+TypeScript is JavaScript plus a static type system that is checked at compile time, then erased before the code runs.
+It also clears up the myths that types exist at runtime or that TypeScript validates outside data.
+
+### 2. Basic Types, Annotations, and Type Inference
+Covers primitives, arrays, tuples, and the `: type` annotation, plus how the compiler infers types so you don't always write them.
+It also contrasts `any` (turns checking off) with `unknown` (forces a check before use).
+
+### 3. Object Types, Type Aliases, and Interfaces
+Shows how to describe an object's shape and give it a name with `type` or `interface`.
+It also introduces structural typing and how to choose between the two.
+
+### 4. Union Types and Literal Types
+A union (`|`) means "one of several types," and a literal type allows exactly one value.
+Combined, they model fixed sets like `"GET" | "POST" | "PUT"`.
+
+### 5. Narrowing
+Shows how to turn "maybe A or B" into "definitely A" using `typeof`, `in`, `instanceof`, and equality checks.
+It also covers discriminated unions, `never` for exhaustiveness, and why to avoid `as` and `!`.
+
+### 6. Typed Functions
+Covers annotating parameters and return types, plus optional, default, and rest parameters.
+Treats a function signature as a contract between the function and its callers.
+
+### 7. Introductory Generics
+A type parameter like `<T>` acts as a variable for a type, so a function's output type can depend on its input type without resorting to `any`.
+Also covers generic interfaces and constraints with `extends`.
+
+---
+
+## Part B: The Project
+
+### 8. Strict Checking and `tsconfig.json`
+Explains how `tsconfig.json` configures the compiler and what `strict` turns on, especially `strictNullChecks` and `noImplicitAny`.
+Learners also practice reading and fixing common compiler errors.
+
+### 9. Modules
+Covers splitting code into ES modules with named and default exports, re-exports, and type-only imports.
+It also explains the `.js` extension rule that applies under `nodenext`.
+
+### 10. Linting and Formatting
+Separates three tools that beginners blur together: the type checker (`tsc`), the linter (ESLint with typescript-eslint), and the formatter (Prettier).
+Learners wire them into npm scripts and format-on-save.
+
+### 11. Dependency Lockfiles
+Explains how version ranges in `package.json` can drift over time, and how a committed `package-lock.json` pins every exact version.
+`npm ci` then reproduces an identical install on any machine or CI server.
+
+---
+
+## Also in the Lesson
+
+- **Starter project:** a scaffold that wires every Part B idea together and gives Part A code somewhere to live.
+- **Knowledge check:** five short questions covering compile time vs. runtime, narrowing, generics, strict checking, and lockfiles.
+- **Orders module exercise:** a hands-on build using literal unions, a discriminated union, a generic `findById`, and a type-only import.
+
+---
+
+## Note Before Class: TypeScript Version
+
+The lesson's instructor note says to pin TypeScript to `~6.0`, because TypeScript 7.x does not yet work with typescript-eslint. Your current `package.json` has `"typescript": "^7.0.2"`.
+
+This only matters once you reach Section 10 (linting). If you plan to teach it, run:
+
+```bash
+npm install -D typescript@~6.0
+```
+
+The note was written on September 30, 2026 and says to re-verify before class, so check the current status first.
+
+
 **Type of document:** Content and reference pass (no slides or visual layouts yet)
 **Assumed before starting:** Modern JavaScript (`let`/`const`, arrow functions, destructuring, `async`/`await`, template strings), a current Node.js LTS installed, and VS Code (or another editor with TypeScript support)
 
@@ -11,7 +84,7 @@
 
 ## Learning Objectives
 
-By the end of this class, learners will be able to:
+By the end of this class, you will be able to:
 
 1. **Annotate** variables, objects, and functions with TypeScript types, and **explain** when the compiler infers a type for them instead.
 2. **Model** real-world data using type aliases, interfaces, union types, and literal types, and **choose** between `interface` and `type` for a given situation.
