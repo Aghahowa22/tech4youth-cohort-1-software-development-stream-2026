@@ -1,12 +1,8 @@
 # Lesson A (Concepts): Controlled Forms, Validation, Cleanup, Custom Hooks, and Local vs Server State
 
-> **Assumptions (read first).** This is the concepts-only half of a 4-hour, project-based session. Lesson A (about 90 min, including the knowledge check) is taught first; after a 15-minute break, **Lesson B** (`lesson-b-shoplite-project.md`, about 135 min) applies everything by building the *ShopLite* app. Prior lessons: components, `useState`, `useEffect`. I also assume learners know basic routing (`Link`, `useParams`), because Lesson B needs it; if not, add a 5-minute primer. Stack: latest stable React, Vite `react-ts` template, **pnpm**, zod, TanStack Query. Anything version-sensitive is flagged **Version note**; please verify these against current docs before teaching.
-
----
-
 ## 1. Learning objectives
 
-By the end, learners will be able to:
+By the end, you will be able to:
 
 1. **Build** a typed, controlled form in React and **refactor** state updates so they are immutable, with state owned by the right component.
 2. **Validate** form data with a zod schema, infer TypeScript types from it, and render per-field error messages.
@@ -16,7 +12,7 @@ By the end, learners will be able to:
 
 ## 2. Prerequisite check
 
-Learners must already be able to:
+you must already be able to:
 
 - Write a function component that returns JSX and accepts typed props.
 - Use `useState` (including the functional update form `setX(prev => ...)`) and explain that a state change triggers a re-render.
@@ -316,15 +312,23 @@ interface Product { id: number; title: string }
 export function ProductTitle({ id }: { id: number }) {
   const [title, setTitle] = useState<string | null>(null);
 
-  useEffect(() => {
-    const controller = new AbortController();         // 1
-    fetch("/products.json", { signal: controller.signal })
-      .then((r) => r.json())
-      .then((list: Product[]) => setTitle(list.find((p) => p.id === id)?.title ?? "Not found"))
-      .catch((err) => {
-        if (err.name !== "AbortError") console.error(err); // 2
-      });
-    return () => controller.abort();                  // 3
+ useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadTitle() {
+      try {
+        const res = await fetch("/products.json", { signal: controller.signal });
+        if (!res.ok) throw new Error(`Request failed (${res.status})`);   // 1
+        const list: Product[] = await res.json();
+        setTitle(list.find((p) => p.id === id)?.title ?? "Not found");
+      } catch (err) {
+        if (err instanceof DOMException && err.name === "AbortError") return; // 2
+        console.error(err);
+      }
+    }
+
+    void loadTitle();                                  // 3
+    return () => controller.abort();                   // 4
   }, [id]);
 
   return <h2>{title ?? "Loading…"}</h2>;
@@ -671,11 +675,11 @@ Rule of thumb: **never copy server data into `useState`**. Read it from the quer
 | ----- | ---------------------------------------------------------------------------------- | --------------------------------------------------- |
 | 0-10  | 3.1: live-code `NameForm`; show `value` without `onChange` warning                 | Demo, then *Try it*                                 |
 | 10-20 | 3.2: demo mutation bug (`push`) vs fix; build `CartDemo`                           | Demo, then *Try it*                                 |
-| 20-35 | 3.3: build schema, then the form, together; show error rendering                   | Live code; learners do *Try it* (`confirmPassword`) |
-| 35-45 | 3.4: show StrictMode "setup, cleanup, setup"; demo race with a slow `fetch`        | Demo; learners predict logs                         |
+| 20-35 | 3.3: build schema, then the form, together; show error rendering                   | Live code; you do *Try it* (`confirmPassword`) |
+| 35-45 | 3.4: show StrictMode "setup, cleanup, setup"; demo race with a slow `fetch`        | Demo; you predict logs                         |
 | 45-55 | 3.5: extract the debounce logic into a hook                                        | Live refactor; short *Try it*                       |
-| 55-65 | 3.6: build the 3 context files; show the provider error                            | Demo; learners wire `UserBadge`                     |
-| 65-80 | 3.7: contrast with 3.4's hand-written fetch; show `ProductNames`; mutation preview | Demo; learners do *Try it*                          |
+| 55-65 | 3.6: build the 3 context files; show the provider error                            | Demo; you wire `UserBadge`                     |
+| 65-80 | 3.7: contrast with 3.4's hand-written fetch; show `ProductNames`; mutation preview | Demo; you do *Try it*                          |
 | 80-90 | Knowledge check                                                                    | Individual, then go over answers                    |
 
 *Diagram hint:* a left-to-right flow of 3.1 to 3.7 with two colored lanes (client state, side-effects/server) merging at the end.
