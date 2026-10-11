@@ -4,13 +4,13 @@
 **Stack:** Vite, React, TypeScript, Tailwind CSS, React Router, fetch, axios, TanStack Query, json-server
 **Audience:** Instructor notes. Simple enough to read out to learners.
 
-**Contents:** Part A: Project structure | Part B: System design | Part C: Recap card | Part D: How the prompt was generated (prompting lessons for students)
+**Contents:** Part A: Project structure | Part B: System design | Part C: Recap card | Part D: How the prompt was generated (prompting lessons)
 
 ---
 
 ## Part A: The Complete Project Structure
 
-This is the **final** structure after all parts are finished. Each file is tagged with the part where learners create it, so nothing appears before it is needed.
+This is the **final** structure after all parts are finished. Each file is tagged with the part where you create it, so nothing appears before it is needed.
 
 ```text
 shopease/
@@ -158,7 +158,11 @@ export type CreateProductInput = Omit<Product, "id">;
 
 ### 1. What is system design?
 
+***MAIN: System design is the process of planning the architecture, components, modules, interfaces, and data flow of a software system before writing code. It acts as a blueprint to ensure the application remains scalable, reliable, and efficient as user traffic and data grow***
+
 **System design is deciding how the pieces of an app fit together before (and while) you build it.**
+
+
 
 Think of building a house. You do not start by stacking bricks. You first decide where the kitchen goes, where the pipes run, and where the front door is. System design is that plan for software.
 
