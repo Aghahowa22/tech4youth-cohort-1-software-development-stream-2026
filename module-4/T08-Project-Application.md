@@ -19,12 +19,10 @@
 You will prepare the starter yourself; this lesson assumes it contains the following. Adjust if yours differs.
 
 ```bash
-pnpm create vite@latest shoplite --template react-ts
+npm create vite@latest shoplite --template react-ts
 cd shoplite
-pnpm install
-pnpm add react-router zod @tanstack/react-query
-pnpm add tailwindcss @tailwindcss/vite
-pnpm dev
+npm install react-router zod @tanstack/react-query tailwindcss @tailwindcss/vite
+npm run dev
 ```
 
 - Vite `react-ts` scaffold, default demo code removed (`App.tsx` renders an empty `<div />`).
