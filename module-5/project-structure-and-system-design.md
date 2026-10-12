@@ -2,15 +2,12 @@
 
 **Project:** ShopEase, a TypeScript e-commerce frontend
 **Stack:** Vite, React, TypeScript, Tailwind CSS, React Router, fetch, axios, TanStack Query, json-server
-**Audience:** Instructor notes. Simple enough to read out to learners.
 
 **Contents:** Part A: Project structure | Part B: System design | Part C: Recap card | Part D: How the prompt was generated (prompting lessons)
 
 ---
 
 ## Part A: The Complete Project Structure
-
-This is the **final** structure after all parts are finished. Each file is tagged with the part where you create it, so nothing appears before it is needed.
 
 ```text
 shopease/
